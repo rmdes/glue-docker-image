@@ -39,7 +39,7 @@ ENV PYTHONPATH "$ROOT_DIR/PyGlue.zip:$SPARK_HOME/python/lib/py4j-0.10.9-src.zip:
 RUN cd "$ROOT_DIR" \
     && rm -f PyGlue.zip \
     && zip -r PyGlue.zip awsglue \
-    && mvn -f $ROOT_DIR/pom.xml -DoutputDirectory=$ROOT_DIR/jarsv3 dependency:copy-dependencies \
+    && mvn -f $ROOT_DIR/pom.xml --batch-mode -DoutputDirectory=$ROOT_DIR/jarsv3 dependency:copy-dependencies \
     && mkdir -p "$SPARK_CONF_DIR" \
     && rm -f "$SPARK_CONF_DIR/spark-defaults.conf" \
     && echo "spark.driver.extraClassPath $GLUE_JARS_DIR/*" >> $SPARK_CONF_DIR/spark-defaults.conf \
